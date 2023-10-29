@@ -40,17 +40,27 @@ DEFAULT_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 ]
 
 THIRD_PARTY_APPS = [
     # add apps which you install using pip
     'rest_framework',
+    'rest_framework.authtoken',
+    #
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    #
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+
     'drf_spectacular',
 ]
 
 LOCAL_APPS = [
     # add local apps which you create using startapp
-    'apps.account',
+    'apps.accounts',
     'apps.ticket',
 ]
 
@@ -68,6 +78,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Add the account middleware:
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 if DEBUG:
@@ -159,4 +172,7 @@ MEDIA_ROOT = BASE_DIR / "mediafiles"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = "account.UserAccount"
+AUTH_USER_MODEL = "accounts.UserAccount"
+
+SITE_ID = 1
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
